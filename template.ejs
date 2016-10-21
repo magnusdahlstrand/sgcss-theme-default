@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title><%- opts.title %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<% opts.css.forEach(function (href) {
+		%><link href="<%= href %>" rel="stylesheet"><%
+	}); %>
+	<script>examples=<%- JSON.stringify(opts.examples) %>;</script>
+	<% opts.js.forEach(function (src) {
+		%><script src="<%= src %>"></script><%
+	}); %>
+</head>
+<body>
+	<header class="sg-masthead" style="background-color: <%= opts.color %>;">
+		<a href="/" class="sg-masthead__logo">
+			<% if(item.children) { %><img src="<%= opts.logo %>" alt="<%= opts.title %>" height="32"><% } %>
+			<%= opts.title %>
+		</a>
+		<nav class="sg-masthead__nav">
+				<% opts.nav.forEach(function(link) { %>
+						<a href="<%= link.url %>" target="_blank"><%= link.name %></a>
+				<% }); %>
+		</nav>
+	</header>
+
+	<nav class="sg-menu docs-menu">
+		<% menu(list, 1) %>
+	</nav>
+	<main class="sg-main">
+		<% sections(list, 2) %>
+	</main>
+	<footer class="sg-footer">
+		Last modified <%- lastModified() %>
+	</footer>
+	<script src="prism.js?871234"></script>
+	<script src="examples.js?873428"></script>
+	<script src="script.js?02359872"></script>
+	<script src="anchor.js?225234"></script>
+	<script>
+	anchors.options = {
+		placement: 'left',
+		visible: 'hover',
+		class: 'anchor-link'
+	};
+	anchors.add('h1, h2, h3');
+	</script>
+	<script>
+	function selectText(node) {
+		var range = document.createRange();
+		range.selectNodeContents(node);
+		var sel = window.getSelection();
+		sel.removeAllRanges();
+		sel.addRange(range);
+	}
+	function floatMatch(leaf, cls) {
+		if(!leaf || !leaf.classList) {
+			return false;
+		}
+		if(leaf.classList.contains(cls)) {
+			return leaf;
+		}
+		return floatMatch(leaf.parentNode, cls);
+	}
+	document.addEventListener('click', function(ev) {
+		if(ev.target.nodeName === 'CODE') {
+			selectText(ev.target);
+			return;
+		}
+		var el = floatMatch(ev.target, 'sg-swatch');
+		if(el) {
+			selectText(el.querySelector('.sg-swatch__name'));
+		}
+	});
+	window.onmessage = function(ev) {
+		if(ev.data && ev.data.height && ev.data.width) {
+			var iframe = Array.prototype.find.call(document.querySelectorAll('iframe'), function(iframe) {
+				return iframe.contentWindow === ev.source;
+			});
+			if(iframe) {
+				iframe.style.height = Math.max(40, ev.data.height + 4) + 'px';
+			}
+		}
+	}
+	</script>
+</body>
+</html>
+
+<%
+function menu(children, depth) {
+	%>
+		<% if (depth < 3) children.forEach(function (item) {
+			if (item.name) {
+				if (depth === 1) {modifier = "item";}
+				if (depth === 2) {modifier = "sub";}
+				%>
+				<div class="sg-menu__item">
+					<a class="sg-menu__link <%= depth > 1 ? 'sg-menu__link--sub' : '' %>" href="#<%- item.name %>"><span><%= item.section || item.title %></span></a>
+					<% if(item.children) { %>
+						<div class="sg-menu__sub">
+							<% menu(item.children, depth + 1) %>
+						</div>
+					<% } %>
+				</div>
+				<%
+			}
+		}); %>
+	<%
+}
+
+function sections(children, depth) {
+	depth = Math.max(Math.min(depth, 6), 1);
+
+	children.forEach(function (child) {
+		%>
+			<%- child.content %>
+			<% if (child.children) sections(child.children, depth + 1) %>
+		<%
+	});
+}
+
+function lastModified() {
+	var now = new Date();
+
+	var day = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' ')[now.getDay()];
+
+	var month = 'January February March April May June July August September October November December'.split(' ')[now.getMonth()];
+
+	return day + ', ' + now.getDate() + ' ' + month + ' ' + now.getFullYear() + ' ' + now.getHours() + ':' + ('0' + now.getMinutes()).slice(-2);
+}
+
+%>

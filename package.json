@@ -1,0 +1,27 @@
+{
+  "name": "sgcss-theme-default",
+  "version": "0.1.0",
+  "description": "default theme for sgcss",
+  "keywords": [
+    "sgcss",
+    "css",
+    "sgcss-theme",
+    "style guide",
+    "styleguide",
+    "theme"
+  ],
+  "author": "Magnus Dahlstrand <magnus@mdahlstrand.com>",
+  "license": "MIT",
+  "repository": "mdahlstrand/sgcss-theme-default",
+  "bugs": "https://github.com/mdahlstrand/sgcss-theme-default/issues",
+  "homepage": "https://github.com/mdahlstrand/sgcss-theme-default#readme",
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "object-assign": "^4.0.1"
+  },
+  "scripts": {
+  },
+  "engines": {
+    "node": ">=5.5.0"
+  }
+}
