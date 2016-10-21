@@ -16,7 +16,7 @@
 <body>
 	<header class="sg-masthead" style="background-color: <%= opts.color %>;">
 		<a href="/" class="sg-masthead__logo">
-			<% if(item.children) { %><img src="<%= opts.logo %>" alt="<%= opts.title %>" height="32"><% } %>
+			<% if(opts.logo) { %><img src="<%= opts.logo %>" alt="<%= opts.title %>" height="32"><% } %>
 			<%= opts.title %>
 		</a>
 		<nav class="sg-masthead__nav">
