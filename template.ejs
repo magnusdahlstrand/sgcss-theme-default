@@ -15,7 +15,7 @@
 <body>
 	<header class="sg-masthead">
 		<a href="#" class="sg-masthead__link">
-			<% if(opts.logo) { %><img src="<%= opts.logo %>" class="sg-masthead__logo" alt="<%= opts.title %>" height="32"><% } %>
+			<% if(opts.logo) { %><% if(opts.fixedLogo) { %><img src="<%= opts.logo %>" class="sg-masthead__logo sg-masthead__logo--fixed" alt="<%= opts.title %>" height="32"><% } %><img src="<%= opts.logo %>" class="sg-masthead__logo" alt="<%= opts.title %>" height="32"><% } %>
 			<% if(opts.title) { %><span class="sg-masthead__title"><%= opts.title %></span><% } %>
 		</a>
 	</header>

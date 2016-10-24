@@ -10,6 +10,7 @@ module.exports = function (themeopts) {
 
 	// set theme logo
 	themeopts.logo = themeopts.logo;
+	themeopts.fixedLogo = typeof themeopts.fixedLogo === 'undefined' ? true : themeopts.fixedLogo;
 
 	// set theme title
 	themeopts.title = themeopts.title || 'Style Guide';

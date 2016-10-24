@@ -29,6 +29,12 @@ h1, h2, h3, h4, h5, h6 {
 	height: 32px;
 	margin-right: 1em;
 }
+.sg-masthead__logo--fixed {
+	position: fixed;
+}
+.sg-masthead__logo--fixed + .sg-masthead__logo {
+	visibility: hidden;
+}
 .sg-masthead__title {
 	font-size: 24px;
 	font-weight: 200;
