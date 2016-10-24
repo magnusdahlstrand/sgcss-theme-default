@@ -13,16 +13,11 @@
 	}); %>
 </head>
 <body>
-	<header class="sg-masthead" style="background-color: <%= opts.color %>;">
-		<a href="/" class="sg-masthead__logo">
-			<% if(opts.logo) { %><img src="<%= opts.logo %>" alt="<%= opts.title %>" height="32"><% } %>
-			<%= opts.title %>
+	<header class="sg-masthead">
+		<a href="#" class="sg-masthead__link">
+			<% if(opts.logo) { %><img src="<%= opts.logo %>" class="sg-masthead__logo" alt="<%= opts.title %>" height="32"><% } %>
+			<% if(opts.title) { %><span class="sg-masthead__title"><%= opts.title %></span><% } %>
 		</a>
-		<nav class="sg-masthead__nav">
-				<% opts.nav.forEach(function(link) { %>
-						<a href="<%= link.url %>" target="_blank"><%= link.name %></a>
-				<% }); %>
-		</nav>
 	</header>
 
 	<nav class="sg-menu docs-menu">
