@@ -55,14 +55,32 @@
 		}
 		return floatMatch(leaf.parentNode, cls);
 	}
-	document.addEventListener('click', function(ev) {
-		if(ev.target.nodeName === 'CODE') {
-			selectText(ev.target);
-			return;
-		}
-		var el = floatMatch(ev.target, 'sg-swatch');
-		if(el) {
+	var listeners = {
+		'sg-swatch': function(el) {
 			selectText(el.querySelector('.sg-swatch__name'));
+		},
+		'sg-source': function(el) {
+			selectText(el);
+		},
+		'sg-menu__sub--closed': function(el, ev, sel) {
+			el.classList.remove(sel);
+			el.classList.add('sg-menu__sub--open');
+		},
+		'sg-menu__sub--open': function(el, ev, sel) {
+			if(ev.target !== el) {
+				return;
+			}
+			el.classList.remove(sel);
+			el.classList.add('sg-menu__sub--closed');
+		}
+	};
+	document.addEventListener('click', function(ev) {
+		var el;
+		for(var selector in listeners) {
+			el = floatMatch(ev.target, selector);
+			if(el) {
+				return listeners[selector](el, ev, selector);
+			}
 		}
 	});
 	window.onmessage = function(ev) {
@@ -89,8 +107,8 @@ function menu(children, depth) {
 				%>
 				<div class="sg-menu__item">
 					<a class="sg-menu__link <%= depth > 1 ? 'sg-menu__link--sub' : '' %>" href="#<%- item.name %>"><span><%= item.section || item.title %></span></a>
-					<% if(item.children) { %>
-						<div class="sg-menu__sub">
+					<% if(item.children && item.children.length) { %>
+						<div class="sg-menu__sub sg-menu__sub--closed">
 							<% menu(item.children, depth + 1) %>
 						</div>
 					<% } %>

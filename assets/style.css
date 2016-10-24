@@ -47,32 +47,50 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 	background: #fafafa;
 	border: 1px solid rgba(0,0,0,0.1);
+	border-bottom: none;
+}
+.sg-menu__item {
+	position: relative;
 }
 .sg-menu__link {
 	display: list-item;
 	list-style: none;
-	padding: 0.7em 0.5em 0.6em;
 	text-decoration: none;
 }
-.sg-menu__item:first-child > .sg-menu__link {
-	border-top: none;
+.sg-menu__link,
+.sg-menu__sub:before {
+	padding: 0.7em 0.5em 0.6em;
 }
-.sg-menu__link:hover {
+.sg-menu__link:hover,
+.sg-menu__sub--closed:hover:before {
 	background: rgba(0,0,0,0.05);
 }
-.sg-menu__link,
-.sg-menu__sub,
-.sg-menu__link--sub {
-	border-top: 1px solid rgba(0,0,0,0.1);
+.sg-menu__link {
+	border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 .sg-menu__link--sub {
 	padding-left: 1em;
 	background: rgba(0,0,0,0.03);
 }
+.sg-menu__sub--closed .sg-menu__item {
+	display: none;
+}
+
+.sg-menu__sub:before {
+	content: '🞡';
+	position: absolute;
+	opacity: 0.7;
+	cursor: pointer;
+	top: 0;
+	right: 0;
+}
+.sg-menu__sub--open:before {
+	content: '🞨';
+}
+
 .sg-main {
 	margin: 50px 20px 0 320px;
 }
-
 .sg-main h1 {
 	font-size: 55px;
 	margin: 1em 0 0.5em;
