@@ -8,7 +8,6 @@
 	<% opts.css.forEach(function (href) {
 		%><link href="<%= href %>" rel="stylesheet"><%
 	}); %>
-	<script>examples=<%- JSON.stringify(opts.examples) %>;</script>
 	<% opts.js.forEach(function (src) {
 		%><script src="<%= src %>"></script><%
 	}); %>
@@ -35,9 +34,6 @@
 	<footer class="sg-footer">
 		Last modified <%- lastModified() %>
 	</footer>
-	<script src="prism.js?871234"></script>
-	<script src="examples.js?873428"></script>
-	<script src="script.js?02359872"></script>
 	<script src="anchor.js?225234"></script>
 	<script>
 	anchors.options = {

@@ -15,7 +15,7 @@ module.exports = function (themeopts) {
 	themeopts.title = themeopts.title || 'Style Guide';
 
 	// set theme css
-	themeopts.css = themeopts.css || ['prism.css', 'style.css'];
+	themeopts.css = themeopts.css || ['style.css'];
 
 	// set theme css
 	themeopts.js = themeopts.js || [];
@@ -25,17 +25,6 @@ module.exports = function (themeopts) {
 
   // set navigation links
 	themeopts.nav = themeopts.nav || [];
-
-	// set example conf
-	themeopts.examples = ext({
-		base:    '',
-		target:  '_self',
-		css:     ['style.css'],
-		js:      [],
-		bodyjs:  [],
-		htmlcss: 'background:none;border:0;clip:auto;display:block;height:auto;margin:0;padding:0;position:static;width:auto',
-		bodycss: 'background:none;border:0;clip:auto;display:block;height:auto;margin:0;padding:16px;position:static;width:auto'
-	}, themeopts.examples);
 
 	// return theme
 	return function (docs) {
@@ -53,7 +42,7 @@ module.exports = function (themeopts) {
 				// throw if template could not be read
 				if (error) reject(error);
 				else {
-					// set examples options
+					// set document options
 					docs.opts = ext({}, docs.opts, docs.themeopts);
 
 					// set compiled template
