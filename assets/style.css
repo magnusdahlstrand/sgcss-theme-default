@@ -91,19 +91,39 @@ h1, h2, h3, h4, h5, h6 {
 .sg-main {
 	margin: 50px 20px 0 320px;
 }
-.sg-main h1 {
+
+.sg-heading {
+	position: relative;
+}
+.sg-heading__anchor {
+	position: absolute;
+	right: 100%;
+	line-height: 1em;
+	padding: 3px 7px 0 0;
+	text-decoration: none;
+	visibility: hidden;
+}
+.sg-heading:hover .sg-heading__anchor {
+	visibility: visible;
+}
+.sg-heading__anchor:before {
+	content: '🔗';
+	font-size: 20px;
+	vertical-align: middle;
+}
+.sg-heading--1 {
 	font-size: 55px;
 	margin: 1em 0 0.5em;
 }
-.sg-main h2 {
+.sg-heading--2 {
 	font-size: 34px;
 	margin: 1.5em 0 0.5em;
 }
-.sg-main h3 {
+.sg-heading--3 {
 	font-size: 21px;
 	margin: 1em 0 0.5em;
 }
-.sg-main h4 {
+.sg-heading--4 {
 	font-size: 16px;
 	font-weight: 500;
 	margin: 2em 0 0.5em;
